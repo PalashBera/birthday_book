@@ -20,5 +20,10 @@ const db = {
 };
 
 db.users = require('./user.js')(sequelize, Sequelize);
+db.contacts = require('./contact.js')(sequelize, Sequelize);
+
+// Association between users and contacts
+db.users.hasMany(db.contacts, { foreignKey: 'user_id' });
+db.contacts.belongsTo(db.users, { foreignKey: 'user_id' });
 
 module.exports = db;
